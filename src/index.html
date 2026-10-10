@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ContractKit — Freelance Contracts & Invoices That Get You Paid</title>
+<meta name="description" content="Free freelance contract generator with late-fee and kill-fee clauses. No signup. Download PDF instantly. PRO unlocks all templates for a one-time $19.">
+<style>
+:root{
+  --bg:#0b0e14; --panel:#12161f; --panel2:#171c28; --line:#232a3b;
+  --txt:#eef1f6; --mut:#9aa3b5; --acc:#6ee7a8; --acc2:#5ac8fa; --gold:#ffd166;
+  --danger:#ff6b6b; --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+a{color:var(--acc2);text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:0;z-index:50;background:rgba(11,14,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 22px}
+.logo{font-weight:800;font-size:20px;letter-spacing:.5px}
+.logo span{color:var(--acc)}
+.logo small{display:block;font-size:10px;color:var(--mut);font-weight:500;letter-spacing:2px}
+.navlinks{display:flex;gap:22px;align-items:center;font-size:14px}
+.navlinks a{color:var(--mut)} .navlinks a:hover{color:var(--txt)}
+.btn{display:inline-block;background:var(--acc);color:#06210f;font-weight:700;border:none;border-radius:10px;padding:12px 22px;cursor:pointer;font-size:15px}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+.btn.gold{background:var(--gold);color:#241a02}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.hero{padding:76px 0 54px;text-align:center}
+.hero h1{font-size:clamp(34px,5.4vw,58px);line-height:1.12;font-weight:800;letter-spacing:-1px}
+.hero h1 .hl{color:var(--acc)}
+.hero p{color:var(--mut);font-size:18px;max-width:660px;margin:18px auto 30px}
+.hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.trust{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:34px;color:var(--mut);font-size:13px}
+.trust b{color:var(--txt)}
+section{padding:44px 0}
+h2.sec{font-size:30px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.sub{color:var(--mut);margin-bottom:26px;max-width:680px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.tab{background:var(--panel2);border:1px solid var(--line);color:var(--mut);padding:10px 18px;border-radius:999px;cursor:pointer;font-size:14px;font-weight:600}
+.tab.active{background:var(--acc);color:#06210f;border-color:var(--acc)}
+.tab .lock{font-size:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+label{display:block;font-size:12.5px;color:var(--mut);margin:14px 0 5px;font-weight:600;letter-spacing:.3px}
+input,textarea,select{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:11px 13px;font-size:14.5px;font-family:inherit}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--acc)}
+textarea{resize:vertical;min-height:74px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hint{font-size:12px;color:var(--mut);margin-top:4px}
+.doc{background:#fff;color:#1a1d24;border-radius:10px;padding:44px 46px;font-family:Georgia,"Times New Roman",serif;font-size:14.5px;line-height:1.75;max-height:640px;overflow:auto}
+.doc h3{text-align:center;font-size:20px;margin-bottom:4px;letter-spacing:1px}
+.doc .docsub{text-align:center;font-size:12px;color:#555;margin-bottom:24px}
+.doc h4{margin:20px 0 6px;font-size:15px}
+.doc p{margin:8px 0}
+.doc .field{background:#f1f5ff;border-bottom:2px solid #334;padding:0 6px;font-family:inherit;font-weight:600}
+.sigbox{border:1.5px dashed #999;border-radius:8px;min-height:96px;display:flex;align-items:flex-end;justify-content:space-between;padding:10px 14px;margin-top:8px;gap:12px;flex-wrap:wrap}
+.sigimg{max-height:84px;max-width:260px}
+.docfoot{margin-top:26px;font-size:11.5px;color:#666;border-top:1px solid #ddd;padding-top:12px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+#sigpad{border:1.5px dashed var(--line);border-radius:10px;background:var(--panel2);width:100%;height:150px;touch-action:none;cursor:crosshair}
+.proseal{display:inline-block;background:var(--gold);color:#241a02;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;letter-spacing:1px;margin-left:8px;vertical-align:middle}
+.pricing{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:860px;margin:0 auto}
+@media(max-width:760px){.pricing{grid-template-columns:1fr}}
+.price-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:32px;text-align:center}
+.price-card.pro{border-color:var(--gold);box-shadow:0 0 40px rgba(255,209,102,.08)}
+.price{font-size:44px;font-weight:800;margin:10px 0}
+.price small{font-size:15px;color:var(--mut);font-weight:500}
+.feat{list-style:none;text-align:left;margin:22px 0}
+.feat li{padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--mut)}
+.feat li b{color:var(--txt)} .feat li .x{color:var(--danger)}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:12px}
+.faq summary{cursor:pointer;font-weight:700}
+.faq p{color:var(--mut);margin-top:10px;font-size:14.5px}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--mut);font-size:12.5px;text-align:center}
+/* modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:100;padding:18px}
+.modal-bg.open{display:flex}
+.modal{background:var(--panel);border:1px solid var(--line);border-radius:16px;max-width:560px;width:100%;padding:30px;max-height:92vh;overflow:auto}
+.modal h3{font-size:22px;margin-bottom:6px}
+.addrbox{background:var(--panel2);border:1px dashed var(--acc);border-radius:10px;padding:12px;font-family:monospace;font-size:13px;word-break:break-all;margin:12px 0}
+.status{margin-top:14px;font-size:14px;min-height:22px}
+.status.ok{color:var(--acc)} .status.err{color:var(--danger)} .status.work{color:var(--gold)}
+.step{display:flex;gap:12px;margin:14px 0;font-size:14px;color:var(--mut)}
+.step .n{background:var(--acc);color:#06210f;font-weight:800;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;font-size:13px}
+/* print */
+@media print{
+  body{background:#fff}
+  nav,.hero,.no-print,footer,.toolbar,#sigwrap,section.formsec{display:none!important}
+  .doc{max-height:none;overflow:visible;border-radius:0;padding:0}
+  #previewSec{padding:0}
+}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="logo">Contract<span>Kit</span><small>BY CHACHI</small></div>
+  <div class="navlinks">
+    <a href="#generator">Generator</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+    <button class="btn gold" id="navPro" style="padding:9px 18px">Go PRO — $19</button>
+  </div>
+</div></nav>
+
+<div class="wrap">
+<header class="hero">
+  <h1>Stop getting <span class="hl">paid late.</span><br>Contracts that protect freelancers.</h1>
+  <p>Generate a professional US freelance contract with <b>late-fee</b>, <b>kill-fee</b> and <b>IP-transfer-on-payment</b> clauses in 2 minutes. Free. No signup. Download as PDF instantly.</p>
+  <div class="cta no-print">
+    <a class="btn" href="#generator">Generate my free contract</a>
+    <button class="btn ghost" id="heroPro">Unlock PRO — one-time $19</button>
+  </div>
+  <div class="trust">
+    <div><b>No account</b> required</div><div><b>US-standard</b> clauses</div>
+    <div><b>PDF</b> in one click</div><div><b>Crypto</b> accepted</div>
+  </div>
+</header>
+
+<section id="generator" class="formsec">
+  <h2 class="sec">Contract generator</h2>
+  <p class="sub">Fill in the details, preview the document, sign it, and download the PDF. The free plan includes the Freelance Service Agreement. PRO unlocks every template + the invoice generator.</p>
+  <div class="tabs no-print" id="tabs">
+    <button class="tab active" data-t="service">Freelance Service Agreement <span style="font-size:11px;color:#06210f;background:#fff;border-radius:6px;padding:1px 6px;margin-left:4px">FREE</span></button>
+    <button class="tab" data-t="retainer">Retainer Agreement <span class="lock">🔒 PRO</span></button>
+    <button class="tab" data-t="nda">Mutual NDA <span class="lock">🔒 PRO</span></button>
+    <button class="tab" data-t="invoice">Invoice + Late-Fee <span class="lock">🔒 PRO</span></button>
+  </div>
+  <div id="proBanner" class="card no-print" style="display:none;border-color:var(--gold);margin-bottom:20px">
+    <b style="color:var(--gold)">🔒 PRO template.</b> <span style="color:var(--mut)">Unlock all templates + the invoice generator with a one-time $19 payment.</span>
+    <button class="btn gold" id="bannerPro" style="margin-left:12px;padding:9px 18px">Unlock PRO</button>
+  </div>
+  <div class="grid2">
+    <div class="card no-print" id="formCard"></div>
+    <div>
+      <div id="previewSec"><div class="doc" id="docPreview"></div></div>
+      <div class="toolbar no-print">
+        <button class="btn" id="dlPdf">⬇ Download PDF</button>
+        <button class="btn ghost" id="copyText">Copy text</button>
+      </div>
+      <div class="card no-print" id="sigwrap" style="margin-top:18px">
+        <label style="margin-top:0">Your signature (draw below — it appears on the document)</label>
+        <canvas id="sigpad"></canvas>
+        <div class="toolbar"><button class="btn ghost" id="clearSig">Clear signature</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2 class="sec" style="text-align:center">Simple pricing</h2>
+  <p class="sub" style="text-align:center;margin-left:auto;margin-right:auto">One contract free, forever. PRO is a single payment — never a subscription.</p>
+  <div class="pricing">
+    <div class="price-card">
+      <h3>Free</h3><div class="price">$0<small> / forever</small></div>
+      <ul class="feat">
+        <li><b>✓</b> 1 contract template (Freelance Service Agreement)</li>
+        <li><b>✓</b> Late-fee, kill-fee & IP clauses included</li>
+        <li><b>✓</b> Drawn signature + PDF download</li>
+        <li><b>✓</b> No account, no signup</li>
+        <li><span class="x">✗</span> Retainer, NDA & invoice templates</li>
+      </ul>
+      <a class="btn ghost" href="#generator">Start free</a>
+    </div>
+    <div class="price-card pro">
+      <h3>PRO <span class="proseal">ONE-TIME</span></h3><div class="price">$19<small> / once, yours forever</small></div>
+      <ul class="feat">
+        <li><b>✓</b> <b>Unlimited</b> contracts — all templates</li>
+        <li><b>✓</b> Retainer Agreement template</li>
+        <li><b>✓</b> Mutual NDA template</li>
+        <li><b>✓</b> Invoice generator with late-fee calculator</li>
+        <li><b>✓</b> Pay with crypto (USDT) or PayPal</li>
+      </ul>
+      <button class="btn gold" id="pricePro">Unlock PRO — $19</button>
+      <p class="hint" style="margin-top:12px">That's 8% of one year of Bonsai ($228/yr). Pay once, keep it forever.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq">
+  <h2 class="sec">FAQ</h2>
+  <div style="height:18px"></div>
+  <details><summary>Is the free contract really free?</summary><p>Yes. The Freelance Service Agreement is free forever, no account, no credit card. PRO ($19 one-time) unlocks the retainer, NDA and invoice templates.</p></details>
+  <details><summary>How do I pay for PRO?</summary><p>Send <b>19 USDT on BNB Smart Chain (BSC)</b> to the address shown in the checkout, then paste your transaction hash. Our page verifies it live on the BSC blockchain and unlocks PRO instantly. You can also pay via <b>PayPal</b> — message us with your receipt and we activate your license manually.</p></details>
+  <details><summary>Is this legal advice?</summary><p>No. ContractKit provides general templates for informational purposes only. For your specific situation, consult a licensed attorney in your state.</p></details>
+  <details><summary>Is my data stored anywhere?</summary><p>No. Everything runs in your browser. Your contract details never leave your device — we have no servers and no accounts.</p></details>
+  <details><summary>Can my client sign it too?</summary><p>Yes — print or send the PDF, have both parties sign (electronically drawn signatures are recognized under the US ESIGN Act), and keep a copy each.</p></details>
+</section>
+</div>
+
+<footer>
+  ContractKit by Chachi · Templates are for informational purposes only — not legal advice.<br>
+  Contact: chachiafk@gmail.com
+</footer>
+
+<!-- PRO modal -->
+<div class="modal-bg" id="proModal"><div class="modal">
+  <h3>Unlock ContractKit PRO <span class="proseal">ONE-TIME $19</span></h3>
+  <p class="hint">All templates + invoice generator, forever. No subscription.</p>
+  <div class="step"><div class="n">1</div><div>Send <b>exactly 19 USDT</b> on <b>BNB Smart Chain (BSC / BEP20)</b> to:</div></div>
+  <div class="addrbox" id="payAddr">0xb2a38e074808f0c0d4ee9c13f5894c6c601fb172</div>
+  <button class="btn ghost" id="copyAddr" style="padding:8px 16px;font-size:13px">Copy address</button>
+  <p class="hint" style="color:var(--danger)">⚠ BSC network ONLY. Do not send from any other network — funds would be lost.</p>
+  <div class="step"><div class="n">2</div><div>Paste your BSC transaction hash below. We verify it live on-chain:</div></div>
+  <input id="txhash" placeholder="0x..." style="font-family:monospace">
+  <div class="toolbar"><button class="btn gold" id="verifyBtn">Verify payment & unlock</button>
+  <button class="btn ghost" id="closeModal">Cancel</button></div>
+  <div class="status" id="payStatus"></div>
+  <div class="step"><div class="n">3</div><div>Prefer PayPal? Send $19 to <b>chachiafk@gmail.com</b>, then email us the receipt — we activate your PRO license manually.</div></div>
+</div></div>
+
+<script>
+/* ============ CONFIG ============ */
+const OUR_ADDR = "0xb2a38e074808f0c0d4ee9c13f5894c6c601fb172";
+const USDT_BSC = "0x55d398a43a2bdadcd9c7deafe840ac35fbcd397f";
+const PRICE_WEI = 19n * 10n**18n;
+const TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
+const RPCS = [
+  "https://bsc-dataseed.binance.org/",
+  "https://bsc-dataseed1.defibit.io/",
+  "https://bsc.publicnode.com"
+];
+const PRO_KEY = "contractkit_pro_v1";
+const isPro = () => localStorage.getItem(PRO_KEY) !== null;
+
+/* ============ HELPERS ============ */
+const $ = id => document.getElementById(id);
+const esc = s => String(s??"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money = n => "$" + Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const todayStr = () => new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+function padTopic(addr){ return "0x" + addr.toLowerCase().replace("0x","").padStart(64,"0"); }
+function rpcCall(url, method, params){
+  return fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({jsonrpc:"2.0",id:1,method,params})}).then(r=>r.json());
+}
+
+/* ============ PAYWALL VERIFICATION ============ */
+async function verifyPayment(txHash){
+  if(!/^0x[0-9a-fA-F]{64}$/.test(txHash||""))
+    return {ok:false, msg:"That doesn't look like a BSC transaction hash (expected 0x + 64 hex characters)."};
+  let receipt = null, lastErr = "";
+  for(const url of RPCS){
+    try{
+      const res = await rpcCall(url,"eth_getTransactionReceipt",[txHash]);
+      if(res.error){ lastErr = res.error.message||"RPC error"; continue; }
+      if(res.result){ receipt = res.result; break; }
+    }catch(e){ lastErr = String(e.message||e); }
+  }
+  if(!receipt)
+    return {ok:false, msg:"We couldn't find that transaction on BSC. Check the hash and try again."+(lastErr?" ("+lastErr+")":"")};
+  if(receipt.status !== "0x1" && receipt.status !== 1)
+    return {ok:false, msg:"That transaction failed on-chain. Only successful payments unlock PRO."};
+  const wantTo = padTopic(OUR_ADDR);
+  let paid = 0n;
+  for(const log of (receipt.logs||[])){
+    if((log.address||"").toLowerCase() !== USDT_BSC) continue;
+    const t = log.topics||[];
+    if(t[0] !== TRANSFER_TOPIC) continue;
+    if((t[2]||"").toLowerCase() !== wantTo) continue;
+    try{ paid += BigInt(log.data); }catch(e){}
+  }
+  if(paid < PRICE_WEI)
+    return {ok:false, msg:"That transaction didn't send at least 19 USDT to our address. No payment found — PRO stays locked."};
+  return {ok:true, msg:"Payment verified on BSC. PRO unlocked — welcome aboard."};
+}
+
+/* ============ SIGNATURE PAD ============ */
+const pad = $("sigpad"), pctx = pad.getContext("2d");
+let drawing=false, hasSig=false;
+function sizePad(){ const r=pad.getBoundingClientRect(); pad.width=r.width*2; pad.height=150*2; pctx.scale(2,2); pctx.lineWidth=2.2; pctx.lineCap="round"; pctx.strokeStyle="#eef1f6"; }
+sizePad(); window.addEventListener("resize",()=>{sizePad();});
+function pos(e){ const r=pad.getBoundingClientRect(); const t=e.touches?e.touches[0]:e; return [t.clientX-r.left,t.clientY-r.top]; }
+pad.addEventListener("pointerdown",e=>{drawing=true;hasSig=true;const[x,y]=pos(e);pctx.beginPath();pctx.moveTo(x,y);pad.setPointerCapture(e.pointerId);});
+pad.addEventListener("pointermove",e=>{if(!drawing)return;const[x,y]=pos(e);pctx.lineTo(x,y);pctx.stroke();render();});
+pad.addEventListener("pointerup",()=>{drawing=false;render();});
+$("clearSig").onclick=()=>{pctx.clearRect(0,0,pad.width,pad.height);hasSig=false;render();};
+const sigDataURL = () => hasSig ? pad.toDataURL("image/png") : null;
+
+/* ============ TEMPLATES ============ */
+const F = {
+  service: {
+    name:"Freelance Service Agreement", pro:false,
+    fields:[
+      ["f_name","Your full name (Freelancer)","text",""],
+      ["f_email","Your email","text",""],
+      ["f_addr","Your address","text",""],
+      ["c_name","Client name / company","text",""],
+      ["c_email","Client email","text",""],
+      ["c_addr","Client address","text",""],
+      ["project","Project title","text",""],
+      ["scope","Scope of work (deliverables)","textarea",""],
+      ["start","Start date","text",""],
+      ["deadline","Delivery deadline","text",""],
+      ["fee","Total project fee (USD)","text",""],
+      ["deposit","Upfront deposit %","text","50"],
+      ["latefee","Late fee (% per month on overdue)","text","1.5"],
+      ["killfee","Kill fee (% if client cancels after start)","text","50"],
+      ["revisions","Revision rounds included","text","2"],
+      ["state","Governing law (US state)","text","Delaware"],
+    ]
+  },
+  retainer: {
+    name:"Monthly Retainer Agreement", pro:true,
+    fields:[
+      ["f_name","Your full name (Freelancer)","text",""],
+      ["f_email","Your email","text",""],
+      ["c_name","Client name / company","text",""],
+      ["c_email","Client email","text",""],
+      ["services","Retainer services (scope)","textarea",""],
+      ["hours","Hours included per month","text","20"],
+      ["rate","Monthly retainer fee (USD)","text",""],
+      ["overage","Hourly overage rate (USD)","text",""],
+      ["latefee","Late fee (% per month on overdue)","text","1.5"],
+      ["notice","Termination notice (days)","text","30"],
+      ["state","Governing law (US state)","text","Delaware"],
+    ]
+  },
+  nda: {
+    name:"Mutual Non-Disclosure Agreement", pro:true,
+    fields:[
+      ["p1","Party 1 (you) — name","text",""],
+      ["p2","Party 2 (client) — name","text",""],
+      ["purpose","Purpose of disclosure","text","evaluation of a potential freelance engagement"],
+      ["term","Confidentiality term (years)","text","2"],
+      ["state","Governing law (US state)","text","Delaware"],
+    ]
+  },
+  invoice: {
+    name:"Invoice + Late-Fee Calculator", pro:true,
+    fields:[
+      ["f_name","Your name / business","text",""],
+      ["f_email","Your email","text",""],
+      ["c_name","Bill to (client)","text",""],
+      ["c_email","Client email","text",""],
+      ["invno","Invoice #","text","INV-001"],
+      ["issued","Issue date","text",""],
+      ["due","Due date","text",""],
+      ["items","Line items (one per line: description | qty | rate)","textarea","Design work | 10 | 75"],
+      ["latefee","Late fee (% per month after due date)","text","1.5"],
+      ["payto","Payment instructions","textarea",""],
+    ]
+  }
+};
+let cur = "service";
+const val = id => { const el=document.querySelector(`[data-f="${id}"]`); return el?el.value.trim():""; };
+function sigBlock(label){
+  const img = sigDataURL();
+  return `<div style="margin-top:18px"><p><b>${label}</b></p>
+  <div class="sigbox">${img?`<img class="sigimg" src="${img}">`:`<span style="color:#999">Signature: ___________________________</span>`}
+  <span style="font-size:12px;color:#555">Date: ${esc(todayStr())}</span></div>
+  <p style="font-size:12px;color:#555">Printed name: ___________________________</p></div>`;
+}
+function disclaimer(){ return `<div class="docfoot">This template is provided for informational purposes only and does not constitute legal advice. Both parties should consult a licensed attorney. Electronic signatures are recognized under the U.S. ESIGN Act (15 U.S.C. §7001).</div>`; }
+const D = {
+service(d){ return `
+<h3>FREELANCE SERVICE AGREEMENT</h3><div class="docsub">Independent Contractor Agreement · ${esc(todayStr())}</div>
+<p>This Freelance Service Agreement ("Agreement") is entered into as of <span class="field">${esc(todayStr())}</span>, by and between:</p>
+<p><b>Freelancer:</b> <span class="field">${esc(d.f_name)}</span> (${esc(d.f_email)}), ${esc(d.f_addr)}<br>
+<b>Client:</b> <span class="field">${esc(d.c_name)}</span> (${esc(d.c_email)}), ${esc(d.c_addr)}</p>
+<h4>1. Services & Scope</h4><p>Freelancer agrees to perform the following services for the project <b>"${esc(d.project)}"</b>:<br><span class="field">${esc(d.scope)}</span></p>
+<h4>2. Timeline</h4><p>Work begins on <span class="field">${esc(d.start)}</span> with delivery targeted for <span class="field">${esc(d.deadline)}</span>. Delays caused by Client (late feedback, missing assets) extend the deadline day-for-day.</p>
+<h4>3. Compensation</h4><p>Total project fee: <b>${money(d.fee)}</b> USD. An upfront deposit of <span class="field">${esc(d.deposit)}%</span> is due before work begins; the balance is due upon delivery of final files.</p>
+<h4>4. Late Payment Fee</h4><p>Any amount not paid within <b>14 days</b> of its due date accrues a late fee of <span class="field">${esc(d.latefee)}%</span> per month (or the maximum permitted by law), until paid in full. Client is responsible for all reasonable collection costs.</p>
+<h4>5. Kill Fee</h4><p>If Client cancels the project after work has begun, Client owes a kill fee of <span class="field">${esc(d.killfee)}%</span> of the remaining unpaid fee, in addition to payment for all work completed to date.</p>
+<h4>6. Revisions</h4><p><span class="field">${esc(d.revisions)}</span> rounds of reasonable revisions are included. Additional revisions are billed at Freelancer's standard hourly rate.</p>
+<h4>7. Intellectual Property</h4><p>All intellectual property in the deliverables transfers to Client <b>only upon receipt of full payment</b>. Until then, all rights remain with Freelancer, who may withhold final source files for unpaid balances.</p>
+<h4>8. Independent Contractor</h4><p>Freelancer is an independent contractor, not an employee of Client, and is responsible for their own taxes and insurance.</p>
+<h4>9. Termination</h4><p>Either party may terminate with 14 days' written notice. Client pays for all work performed through the termination date plus any applicable kill fee.</p>
+<h4>10. Governing Law</h4><p>This Agreement is governed by the laws of the State of <span class="field">${esc(d.state)}</span>.</p>
+<h4>11. Entire Agreement</h4><p>This document is the entire agreement between the parties regarding its subject matter and supersedes all prior discussions.</p>
+${sigBlock("Freelancer")}${sigBlock("Client")}${disclaimer()}`; },
+retainer(d){ return `
+<h3>MONTHLY RETAINER AGREEMENT</h3><div class="docsub">Independent Contractor Agreement · ${esc(todayStr())}</div>
+<p>Between <b>Freelancer:</b> <span class="field">${esc(d.f_name)}</span> (${esc(d.f_email)}) and <b>Client:</b> <span class="field">${esc(d.c_name)}</span> (${esc(d.c_email)}), effective <span class="field">${esc(todayStr())}</span>.</p>
+<h4>1. Retainer Services</h4><p><span class="field">${esc(d.services)}</span></p>
+<h4>2. Hours & Fee</h4><p>Retainer includes <span class="field">${esc(d.hours)}</span> hours per month for a flat fee of <b>${money(d.rate)}</b> USD, payable in advance on the 1st of each month. Unused hours do not roll over unless agreed in writing. Additional hours bill at <b>${money(d.overage)}</b>/hour.</p>
+<h4>3. Late Payment Fee</h4><p>Overdue amounts accrue <span class="field">${esc(d.latefee)}%</span> per month until paid. Work may pause on accounts more than 15 days overdue.</p>
+<h4>4. Intellectual Property</h4><p>IP in deliverables transfers to Client only upon full payment of the applicable month's fee.</p>
+<h4>5. Term & Termination</h4><p>Month-to-month. Either party may terminate with <span class="field">${esc(d.notice)}</span> days' written notice; fees for the notice period remain due.</p>
+<h4>6. Independent Contractor & Governing Law</h4><p>Freelancer is an independent contractor. Governed by the laws of the State of <span class="field">${esc(d.state)}</span>.</p>
+${sigBlock("Freelancer")}${sigBlock("Client")}${disclaimer()}`; },
+nda(d){ return `
+<h3>MUTUAL NON-DISCLOSURE AGREEMENT</h3><div class="docsub">${esc(todayStr())}</div>
+<p>Between <b>${esc(d.p1)}</b> ("Party 1") and <b>${esc(d.p2)}</b> ("Party 2"), for the purpose of: <span class="field">${esc(d.purpose)}</span>.</p>
+<h4>1. Confidential Information</h4><p>Any non-public information disclosed by either party, marked or reasonably understood as confidential.</p>
+<h4>2. Obligations</h4><p>Each party shall (a) keep the other's Confidential Information strictly confidential, (b) use it only for the Purpose above, and (c) not disclose it to third parties without prior written consent.</p>
+<h4>3. Exclusions</h4><p>Information that is or becomes public, was already known, is independently developed, or is disclosed under legal compulsion.</p>
+<h4>4. Term</h4><p>Obligations survive for <span class="field">${esc(d.term)}</span> years from disclosure.</p>
+<h4>5. No License</h4><p>Nothing herein grants any IP license. Governed by the laws of the State of <span class="field">${esc(d.state)}</span>.</p>
+${sigBlock("Party 1")}${sigBlock("Party 2")}${disclaimer()}`; },
+invoice(d){
+  let rows="", sub=0;
+  d.items.split("\n").forEach(line=>{ const p=line.split("|").map(s=>s.trim()); if(p.length<3)return;
+    const q=parseFloat(p[1])||0, r=parseFloat(p[2])||0, amt=q*r; sub+=amt;
+    rows+=`<tr><td>${esc(p[0])}</td><td style="text-align:center">${q}</td><td style="text-align:right">${money(r)}</td><td style="text-align:right"><b>${money(amt)}</b></td></tr>`;});
+  const due=d.due?new Date(d.due):null; const now=new Date(); let late=0, lateNote="";
+  if(due && !isNaN(due) && now>due){ const days=Math.ceil((now-due)/864e5); late=sub*(parseFloat(d.latefee)||0)/100/30*days;
+    lateNote=`<p style="color:#a33"><b>OVERDUE by ${days} day(s).</b> Late fee accrued at ${esc(d.latefee)}%/month: <b>${money(late)}</b>. New balance: <b>${money(sub+late)}</b>.</p>`; }
+  return `
+<h3>INVOICE</h3><div class="docsub">Invoice ${esc(d.invno)} · Issued ${esc(d.issued||todayStr())}</div>
+<p><b>From:</b> ${esc(d.f_name)} (${esc(d.f_email)})<br><b>Bill to:</b> ${esc(d.c_name)} (${esc(d.c_email)})</p>
+<table style="width:100%;border-collapse:collapse;font-size:14px;margin:14px 0">
+<tr style="border-bottom:2px solid #333"><th style="text-align:left">Description</th><th>Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Amount</th></tr>${rows}
+<tr><td colspan="3" style="text-align:right;padding-top:10px"><b>Subtotal</b></td><td style="text-align:right"><b>${money(sub)}</b></td></tr></table>
+<p><b>Due date:</b> ${esc(d.due||"—")}</p>${lateNote}
+<p><b>Late-fee terms:</b> Amounts unpaid after the due date accrue ${esc(d.latefee)}% per month until paid in full, plus reasonable collection costs.</p>
+<p><b>Payment instructions:</b><br>${esc(d.payto).replace(/\n/g,"<br>")}</p>
+${sigBlock("Issued by")}${disclaimer()}`; }
+};
+
+/* ============ FORM + PREVIEW ============ */
+function getData(){ const d={}; F[cur].fields.forEach(([id])=>{ d[id]=val(id); }); return d; }
+function renderForm(){
+  const t=F[cur];
+  $("formCard").innerHTML = `<h3 style="margin-bottom:4px">${t.name}${t.pro?' <span class="proseal">PRO</span>':""}</h3>
+  <p class="hint">Type and watch the document update live.</p>` +
+  t.fields.map(([id,label,type,def])=>`<label>${label}</label>`+
+    (type==="textarea"?`<textarea data-f="${id}">${esc(def)}</textarea>`
+     :`<input data-f="${id}" type="text" value="${esc(def)}" placeholder="${esc(label)}">`)).join("");
+  document.querySelectorAll("[data-f]").forEach(el=>el.addEventListener("input",render));
+  render();
+}
+function render(){
+  const t=F[cur];
+  $("docPreview").innerHTML = D[cur](getData());
+}
+document.querySelectorAll("#tabs .tab").forEach(btn=>btn.onclick=()=>{
+  const t=btn.dataset.t;
+  if(F[t].pro && !isPro()){ $("proBanner").style.display="block"; }
+  else { $("proBanner").style.display="none"; }
+  document.querySelectorAll("#tabs .tab").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active"); cur=t; renderForm();
+  document.getElementById("generator").scrollIntoView({behavior:"smooth"});
+});
+
+/* ============ DOWNLOAD / COPY ============ */
+$("dlPdf").onclick=()=>{ window.print(); };
+$("copyText").onclick=()=>{
+  const tmp=document.createElement("div"); tmp.innerHTML=$("docPreview").innerHTML;
+  navigator.clipboard.writeText(tmp.innerText).then(()=>{$("copyText").textContent="Copied ✓";setTimeout(()=>$("copyText").textContent="Copy text",1600);});
+};
+
+/* ============ PRO MODAL ============ */
+const modal=$("proModal");
+const openPro=()=>{ if(isPro()){ setProUI(); return; } modal.classList.add("open"); };
+["navPro","heroPro","pricePro","bannerPro"].forEach(id=>{ const el=$(id); if(el) el.onclick=openPro; });
+$("closeModal").onclick=()=>modal.classList.remove("open");
+modal.addEventListener("click",e=>{ if(e.target===modal) modal.classList.remove("open"); });
+$("copyAddr").onclick=()=>{ navigator.clipboard.writeText(OUR_ADDR); $("copyAddr").textContent="Copied ✓"; setTimeout(()=>$("copyAddr").textContent="Copy address",1600); };
+function setProUI(){
+  document.querySelectorAll("#tabs .tab .lock").forEach(el=>{ el.textContent="✓"; });
+  $("proBanner").style.display="none";
+  ["navPro","heroPro","pricePro"].forEach(id=>{ const el=$(id); if(el){ el.textContent="PRO active ✓"; el.disabled=true; }});
+}
+$("verifyBtn").onclick=async()=>{
+  const st=$("payStatus"), btn=$("verifyBtn");
+  st.className="status work"; st.textContent="Checking the BSC blockchain…"; btn.disabled=true;
+  const r=await verifyPayment($("txhash").value.trim());
+  btn.disabled=false;
+  if(r.ok){ st.className="status ok"; st.textContent=r.msg;
+    localStorage.setItem(PRO_KEY,$("txhash").value.trim());
+    setTimeout(()=>{ modal.classList.remove("open"); setProUI(); },1200);
+  } else { st.className="status err"; st.textContent=r.msg; }
+};
+if(isPro()) setProUI();
+renderForm();
+</script>
+</body>
+</html>
